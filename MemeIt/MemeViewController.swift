@@ -16,6 +16,12 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imagePickerView.image = selectedImage
@@ -27,10 +33,13 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func pickAnImage(_ sender: Any) {
+    @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
         self.present(imagePicker, animated: true, completion: nil)
     }
+    
+    
 }
