@@ -25,9 +25,9 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="k4T-qK-Kjo"/>
-                                    <barButtonItem title="Pick" id="9lu-cn-P7l"/>
+                                    <barButtonItem title="Album" id="9lu-cn-P7l"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="HTu-Iy-UmC"/>
-                                    <barButtonItem title="Camera" id="WXA-ke-tWB"/>
+                                    <barButtonItem image="camera" id="WXA-ke-tWB"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="xAt-BO-rn9"/>
                                 </items>
                             </toolbar>
@@ -53,4 +53,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" width="25" height="25"/>
+    </resources>
 </document>
