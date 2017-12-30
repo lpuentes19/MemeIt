@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Meme View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -39,22 +44,44 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="xAt-BO-rn9"/>
                                 </items>
                             </toolbar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vGo-5q-7w9">
+                                <rect key="frame" x="16" y="555" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cjn-cj-74l">
+                                <rect key="frame" x="16" y="55" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="vGo-5q-7w9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ECH-ok-66O"/>
                             <constraint firstItem="cMy-GB-wrD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67.5" id="IvT-so-dCI"/>
+                            <constraint firstItem="Efw-5E-mVr" firstAttribute="top" secondItem="vGo-5q-7w9" secondAttribute="bottom" constant="38" id="JGK-uk-Hko"/>
                             <constraint firstItem="Efw-5E-mVr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="SOz-to-7E9"/>
                             <constraint firstItem="Efw-5E-mVr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Sig-jF-8hi"/>
-                            <constraint firstItem="Efw-5E-mVr" firstAttribute="top" secondItem="cMy-GB-wrD" secondAttribute="bottom" constant="181" id="bTc-9z-BnR"/>
+                            <constraint firstItem="cjn-cj-74l" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="b4U-fD-FOr"/>
                             <constraint firstItem="Efw-5E-mVr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="boP-zi-nss"/>
-                            <constraint firstItem="cMy-GB-wrD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="204" id="ybG-j0-mjK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vGo-5q-7w9" secondAttribute="trailing" constant="16" id="jS8-9z-b42"/>
+                            <constraint firstItem="cMy-GB-wrD" firstAttribute="top" secondItem="cjn-cj-74l" secondAttribute="bottom" constant="139" id="mHp-8n-yM1"/>
+                            <constraint firstItem="cjn-cj-74l" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="35" id="stJ-gs-ed6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cjn-cj-74l" secondAttribute="trailing" constant="16" id="yaf-0L-Ykh"/>
+                            <constraint firstItem="vGo-5q-7w9" firstAttribute="top" secondItem="cMy-GB-wrD" secondAttribute="bottom" constant="113" id="yhF-Dm-skJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cMy-GB-wrD" secondAttribute="trailing" constant="67.5" id="zCL-Bu-sGg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="bottomTextField" destination="vGo-5q-7w9" id="jGO-nJ-X18"/>
                         <outlet property="cameraButton" destination="WXA-ke-tWB" id="fXE-Vx-dsz"/>
                         <outlet property="imagePickerView" destination="cMy-GB-wrD" id="hzy-pp-NUZ"/>
+                        <outlet property="topTextField" destination="cjn-cj-74l" id="uBa-kK-qDr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
