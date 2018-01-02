@@ -25,8 +25,19 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         super.viewWillAppear(animated)
         
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        
+        subscribeToKeyboardWillShowNotifications()
+        subscribeToKeyboardWillHideNotifications()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        unsubscribeFromKeyboardWillShowNotifications()
+        unsubscribeToKeyboardWillHideNotifications()
+    }
+    
+    // MARK: Text Attributes & Setting the textfield delegates
     func setMemeTextAttributesAndDelegate() {
         
         topTextField.delegate = self
@@ -45,6 +56,41 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         bottomTextField.textAlignment = .center
     }
     
+    // MARK: - NSNotification Methods
+    func subscribeToKeyboardWillShowNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardWillShowNotifications() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+    }
+    
+    func subscribeToKeyboardWillHideNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func unsubscribeToKeyboardWillHideNotifications() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    // Adjusting the views frame when the keyboard appears
+    @objc func keyboardWillHide(_ notification: Notification) {
+        view.frame.origin.y += getKeyboardHeight(notification)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        view.frame.origin.y -= getKeyboardHeight(notification)
+    }
+    
+    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
+        
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        
+        return keyboardSize.cgRectValue.height
+    }
+    
+    // MARK: - Text Field Methods
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if topTextField == textField {
             topTextField.text = ""
@@ -71,6 +117,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         return true
     }
     
+    // MARK: - ImagePicker Methods
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imagePickerView.image = selectedImage
@@ -82,6 +129,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: IBActions
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         
         let imagePicker = UIImagePickerController()
