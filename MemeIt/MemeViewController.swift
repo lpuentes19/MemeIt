@@ -10,6 +10,7 @@ import UIKit
 
 class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
+    // MARK: - Properties
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
@@ -26,8 +27,8 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
-        subscribeToKeyboardWillShowNotifications()
-        subscribeToKeyboardWillHideNotifications()
+        //subscribeToKeyboardWillShowNotifications()
+        //subscribeToKeyboardWillHideNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
