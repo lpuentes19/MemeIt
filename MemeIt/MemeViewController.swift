@@ -27,8 +27,8 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
-        //subscribeToKeyboardWillShowNotifications()
-        //subscribeToKeyboardWillHideNotifications()
+        subscribeToKeyboardWillShowNotifications()
+        subscribeToKeyboardWillHideNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -75,12 +75,18 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     // Adjusting the views frame when the keyboard appears
-    @objc func keyboardWillHide(_ notification: Notification) {
-        view.frame.origin.y += getKeyboardHeight(notification)
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if topTextField.isEditing {
+            return
+        }
+        view.frame.origin.y -= getKeyboardHeight(notification)
     }
     
-    @objc func keyboardWillShow(_ notification: Notification) {
-        view.frame.origin.y -= getKeyboardHeight(notification)
+    @objc func keyboardWillHide(_ notification: Notification) {
+        if topTextField.isEditing {
+            return
+        }
+        view.frame.origin.y += getKeyboardHeight(notification)
     }
     
     func getKeyboardHeight(_ notification: Notification) -> CGFloat {
@@ -145,5 +151,11 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         self.present(imagePicker, animated: true, completion: nil)
+    }
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        
+        imagePickerView.image = nil
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
     }
 }
