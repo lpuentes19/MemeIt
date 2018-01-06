@@ -15,6 +15,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,8 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         super.viewWillAppear(animated)
         
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        
+        shareButton.isEnabled = imagePickerView.image != nil
         
         subscribeToKeyboardWillShowNotifications()
         subscribeToKeyboardWillHideNotifications()
@@ -170,10 +173,15 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         imagePicker.sourceType = .photoLibrary
         self.present(imagePicker, animated: true, completion: nil)
     }
+    
+    @IBAction func shareButtonTapped(_ sender: Any) {
+    }
+    
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         
         imagePickerView.image = nil
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
+        shareButton.isEnabled = false
     }
 }

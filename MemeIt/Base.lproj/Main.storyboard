@@ -82,7 +82,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="M5j-ju-1XS">
-                        <barButtonItem key="leftBarButtonItem" image="upload" id="J0W-r4-QE4"/>
+                        <barButtonItem key="leftBarButtonItem" image="upload" id="J0W-r4-QE4">
+                            <connections>
+                                <action selector="shareButtonTapped:" destination="BYZ-38-t0r" id="gbm-Fw-M7D"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="A1e-Db-elO">
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="BYZ-38-t0r" id="tWa-Ag-lpd"/>
@@ -93,6 +97,7 @@
                         <outlet property="bottomTextField" destination="vGo-5q-7w9" id="jGO-nJ-X18"/>
                         <outlet property="cameraButton" destination="WXA-ke-tWB" id="fXE-Vx-dsz"/>
                         <outlet property="imagePickerView" destination="cMy-GB-wrD" id="hzy-pp-NUZ"/>
+                        <outlet property="shareButton" destination="J0W-r4-QE4" id="qDC-eG-3Ja"/>
                         <outlet property="topTextField" destination="cjn-cj-74l" id="uBa-kK-qDr"/>
                     </connections>
                 </viewController>
@@ -116,7 +121,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tit-cT-bNH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-39" y="137"/>
+            <point key="canvasLocation" x="-281" y="136"/>
         </scene>
     </scenes>
     <resources>
