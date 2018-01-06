@@ -175,6 +175,12 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func shareButtonTapped(_ sender: Any) {
+        
+        let activityController = UIActivityViewController(activityItems: [generatedMemedImage()], applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceView = self.view // This ensures that iPads won't crash
+        self.present(activityController, animated: true) {
+            self.save()
+        }
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
