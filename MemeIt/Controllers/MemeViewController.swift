@@ -38,6 +38,24 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         unsubscribeToKeyboardWillHideNotifications()
     }
     
+    func save() {
+        
+        guard let topText = topTextField.text, let bottomText = bottomTextField.text, let image = imagePickerView.image else { return }
+        
+        let meme = Meme(topText: topText, bottomText: bottomText, originalImage: image, memedImage: generatedMemedImage())
+    }
+    
+    func generatedMemedImage() -> UIImage {
+        
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        
+        let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return memedImage
+    }
+    
     // MARK: Text Attributes & Setting the textfield delegates
     func setMemeTextAttributesAndDelegate() {
         

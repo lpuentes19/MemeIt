@@ -68,7 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				95DE54BB1FF5B9BD00C1BCCE /* Main.storyboard */,
-				95FAC1BA2001397200A6C357 /* Meme.swift */,
+				95FAC1BC20013F1000A6C357 /* Models */,
 				95FAC1B92001394600A6C357 /* Controllers */,
 				9511F5FF1FF6FAB30097CFDA /* Resources */,
 			);
@@ -81,6 +81,14 @@
 				9511F6001FF6FBDC0097CFDA /* MemeViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		95FAC1BC20013F1000A6C357 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				95FAC1BA2001397200A6C357 /* Meme.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
