@@ -16,6 +16,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var toolBar: UIToolbar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +27,10 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // This will only enable the camera if the device has one
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
+        // This will only enable the share button if the user selected an image
         shareButton.isEnabled = imagePickerView.image != nil
         
         subscribeToKeyboardWillShowNotifications()
@@ -41,20 +44,26 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         unsubscribeToKeyboardWillHideNotifications()
     }
     
+    // Saving the meme as a model object
     func save() {
         
         guard let topText = topTextField.text, let bottomText = bottomTextField.text, let image = imagePickerView.image else { return }
         
-        let meme = Meme(topText: topText, bottomText: bottomText, originalImage: image, memedImage: generatedMemedImage())
+        let _ = Meme(topText: topText, bottomText: bottomText, originalImage: image, memedImage: generatedMemedImage())
     }
     
+    // Taking the memedImage and saving both the image and text
     func generatedMemedImage() -> UIImage {
+        // Making sure the toolBar does not show when the memeImage is captured
+        toolBar.isHidden = true
         
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+        // Once the memeImage is captured, the toolBar can be visible again
+        toolBar.isHidden = false
         
         return memedImage
     }
@@ -97,6 +106,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     // Adjusting the views frame when the keyboard appears
     @objc func keyboardWillShow(_ notification: Notification) {
+        // This ensures that the view does not move if it's the topTextField that's being edited
         if topTextField.isEditing {
             return
         }
@@ -104,6 +114,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
+        // This ensures that the view does not move if it's the topTextField that's being edited
         if topTextField.isEditing {
             return
         }
@@ -175,10 +186,11 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func shareButtonTapped(_ sender: Any) {
-        
-        let activityController = UIActivityViewController(activityItems: [generatedMemedImage()], applicationActivities: nil)
+        let image = generatedMemedImage()
+        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         activityController.popoverPresentationController?.sourceView = self.view // This ensures that iPads won't crash
         self.present(activityController, animated: true) {
+            // Create the Meme Model Object
             self.save()
         }
     }

@@ -11,6 +11,7 @@ import UIKit
 
 struct Meme {
     
+    // MARK: - Properties
     var topText: String
     var bottomText: String
     var originalImage: UIImage
